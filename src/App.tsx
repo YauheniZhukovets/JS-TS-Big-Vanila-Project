@@ -1,12 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+
+    // const name = ['Zhenya', 'Dima', 'Petya', 'Kiril', 'Artem', 'Andrey']
+    const name = [{name: "Zhenya"}, {name: "Dima"}, {name: "Petya"}, {name: "Kiril"}, {name: "Artem"}, {name: "Andrey"}]
+    const liElement = name.map(u => <li>{u.name}</li>)
+
+
+    return (
+        <div className="App">
+            <ul>
+                {liElement}
+            </ul>
+        </div>
+    );
 }
 
 export default App;
