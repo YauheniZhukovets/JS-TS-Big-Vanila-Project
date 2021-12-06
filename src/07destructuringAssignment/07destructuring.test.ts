@@ -1,31 +1,54 @@
-type userType = {
-    id: number
-    name: string
-}
+import {ManType} from './07destructuring';
 
-type usersType = {
-    [key: string]: userType
-}
 
-let users: usersType
-
+let props: ManType;
 beforeEach(() => {
-    users = {
-        '101': {id: 101, name: 'Dimych'},
-        '2222223': {id: 2222223, name: 'Natasha'},
-        '2323': {id: 2323, name: 'Valera'},
-        '3': {id: 3, name: 'Katya'}
+    props = {
+        name: 'Dimych',
+        age: 32,
+        lessons: [{title: '1'}, {title: '2'}, {title: '3'}],
+        address: {
+            street: {
+                title: 'Nezavisimosty street'
+            }
+        }
     }
 })
 
-test('should select corresponding user', () => {
-    users['3'].name = 'Ekaterina'
-    expect(users['3'].name).toBe('Ekaterina')
+test('1', () => {
+
+    //const age = props.age;
+    //const lessons = props.lessons
+    const {age, lessons} = props;
+    const {title} = props.address.street
+
+
+    const a = props.age;
+    const l = props.lessons
+
+    expect(age).toBe(32)
+    expect(lessons.length).toBe(3)
+
+    expect(a).toBe(32)
+    expect(l.length).toBe(3)
+    expect(title).toBe('Nezavisimosty street')
+
+
 })
 
+test('2', () => {
+    const l1 = props.lessons[0]
+    const l2 = props.lessons[1]
 
-test('should delete corresponding user', () => {
-    delete users['3']
-    expect(users['3']).toBeUndefined()
+    // const [ls1, ls2] = props.lessons
 
+    const [, ls2, ...restLessons] = props.lessons
+
+    expect(l1.title).toBe('1')
+    expect(l2.title).toBe('2')
+
+    expect(ls2.title).toBe('2')
+
+    expect(restLessons.length).toBe(1)
+    expect(restLessons[0].title).toBe('3')
 })
